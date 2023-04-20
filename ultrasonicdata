@@ -5,7 +5,6 @@ import Adafruit_MCP3008
 
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11,GPIO.OUT)
 GPIO.setup(13, GPIO.IN)
 
 GPIO.setwarnings(False)
@@ -15,46 +14,9 @@ SPI_PORT= 0
 SPI_DEVICE=0
 mcp= Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-threshold= 400
-soundthresh= 600
-
-def handle_interrupt(channel):
-    if (mcp.read_adc(1) > soundthresh):
-        GPIO.output(11,1)
-        time.sleep(0.1)
-        GPIO.output(11,0)
-
-GPIO.add_event_detect(13, GPIO.RISING, callback=handle_interrupt)
 
 # Main program loop.
 while True:
 
-    for i in range(5):
-	GPIO.output(11,1)
-	time.sleep(0.5)
-	GPIO.output(11,0)
-	time.sleep(0.5)
-
-    print('Reading light values, press Ctrl-C to quit...')
-    for i in range(50):
-	if (mcp.read_adc(0)>threshold):
-            print('Light: ')
-            print (mcp.read_adc(0))
-        else:
-            print('Dark: ') 
-            print (mcp.read_adc(0))
-        time.sleep(0.1);
-
-    for i in range(4):
-	GPIO.output(11,1)
-	time.sleep(0.2)
-	GPIO.output(11,0)
-	time.sleep(0.2)
-    
-    try:
-        print('Reading sound values, press Ctrl-C to quit...')
-	for i in range(50):        
-	   print (mcp.read_adc(1))
-    except KeyboardInterrupt:
-	print('Sound sensor tapped')
+  
 

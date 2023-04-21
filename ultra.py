@@ -33,7 +33,7 @@ while True:
       time.sleep(0.1) # don't overload the i2c bus
 
    if ((grovepi.digitalRead(button))=0)
-      print(act_dist)
+      print(dist_list)
            
 
         

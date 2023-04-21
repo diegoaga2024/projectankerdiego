@@ -15,9 +15,9 @@ button = 3
 
 grovepi.pinMode(button,"INPUT")
 
-lower_thresh=5;
+lower_thresh=5
 
-upper_thresh=30;
+upper_thresh=30
 
 # Create empty list
 dist_list= []

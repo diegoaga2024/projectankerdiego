@@ -31,9 +31,6 @@ while True:
         print(grovepi.digitalRead(button))
         time.sleep(.5)
         
-        except IOError:
-            print ("Error")
-        
     time.sleep(0.1) # don't overload the i2c bus
     
     else:

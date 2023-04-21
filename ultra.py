@@ -34,7 +34,7 @@ while True:
         #time.sleep(.5)
         
     #else:
-        print("Back off")
+        #print("Back off")
 
         
         

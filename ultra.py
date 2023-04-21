@@ -20,7 +20,7 @@ threshold=15;
 
 while True:
    try: 
-        if ((grovepi.digitalRead(button) && (grovepi.ultrasonicRead(ultrasonic_ranger)) < threshold) ):  # Button is pressed
+        if ((grovepi.digitalRead(button) and (grovepi.ultrasonicRead(ultrasonic_ranger)) < threshold) ):  # Button is pressed
             print("Button pressed, recording data...")
             # Read distance value from Ultrasonic
             print(grovepi.ultrasonicRead(ultrasonic_ranger))

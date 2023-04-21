@@ -23,16 +23,16 @@ upper_thresh=30;
 dist_list= []
 
 while True:  
-   act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger)
+   act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
    
    if ((grovepi.digitalRead(button)) and (act_dist > lower_thresh) and (act_dist < upper_thresh)):  # Button is pressed
-      print("Button pressed, recording data...")
-      # Read distance value from Ultrasonic
-      act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
-      dist_list.append(act_dist)
-      time.sleep(0.1) # don't overload the i2c bus
+    print("Button pressed, recording data...")
+    # Read distance value from Ultrasonic
+    act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
+    dist_list.append(act_dist)
+    time.sleep(0.1) # don't overload the i2c bus
 
-   if ((grovepi.digitalRead(button))==0)
+   else ((grovepi.digitalRead(button))==0):
       print(dist_list)
            
 

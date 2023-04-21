@@ -15,29 +15,26 @@ button = 3
 
 grovepi.pinMode(button,"INPUT")
 
-threshold=5;
+lower_thresh=5;
 
+upper_thresh=30;
 
-while True:
-   try: 
-        if ((grovepi.digitalRead(button) and (grovepi.ultrasonicRead(ultrasonic_ranger)) > threshold) ):  # Button is pressed
-            print("Button pressed, recording data...")
-            # Read distance value from Ultrasonic
-            print(grovepi.ultrasonicRead(ultrasonic_ranger))
-            time.sleep(0.1) # don't overload the i2c bus
-        
-   except Exception as e:
-        print ("Error:{}".format(e))
-            
-        #start_time = time.time()  # Record start time
-       
-    #if (grovepi.ultrasonicRead(ultrasonic_ranger) > threshold):
-        #print(" Far enough")
-        #print(grovepi.digitalRead(button))
-        #time.sleep(.5)
-        
-    #else:
-        #print("Back off")
+# Create empty list
+dist_list= []
+
+while True:  
+   act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger)
+   
+   if ((grovepi.digitalRead(button) and act_dist > lower_thresh and act_dist < upper_thresh)):  # Button is pressed
+      print("Button pressed, recording data...")
+      # Read distance value from Ultrasonic
+      act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
+      dist_list.append(act_dist)
+      time.sleep(0.1) # don't overload the i2c bus
+
+   if ((grovepi.digitalRead(button))=0)
+      print(act_dist)
+           
 
         
         

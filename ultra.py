@@ -25,7 +25,7 @@ dist_list= []
 while True:  
    act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger)
    
-   if ((grovepi.digitalRead(button) and act_dist > lower_thresh and act_dist < upper_thresh)):  # Button is pressed
+   if ((grovepi.digitalRead(button)) and (act_dist > lower_thresh) and (act_dist < upper_thresh)):  # Button is pressed
       print("Button pressed, recording data...")
       # Read distance value from Ultrasonic
       act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))

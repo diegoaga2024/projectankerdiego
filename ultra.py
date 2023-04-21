@@ -19,20 +19,21 @@ threshold=10;
 
 
 while True:
-    try:
+    
+    if grovepi.digitalRead(button):  # Button is pressed
+        print("Button pressed, recording data...")
         # Read distance value from Ultrasonic
         print(grovepi.ultrasonicRead(ultrasonic_ranger))
         time.sleep(0.1) # don't overload the i2c bus
+
+        #start_time = time.time()  # Record start time
+       
+    #if (grovepi.ultrasonicRead(ultrasonic_ranger) > threshold):
+        #print(" Far enough")
+        #print(grovepi.digitalRead(button))
+        #time.sleep(.5)
         
-    except Exception as e:
-        print ("Error:{}".format(e))
-    
-    if (grovepi.ultrasonicRead(ultrasonic_ranger) > threshold):
-        print(" Far enough")
-        print(grovepi.digitalRead(button))
-        time.sleep(.5)
-        
-    else:
+    #else:
         print("Back off")
 
         

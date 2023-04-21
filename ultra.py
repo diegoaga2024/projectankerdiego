@@ -22,7 +22,8 @@ while True:
     try:
         # Read distance value from Ultrasonic
         print(grovepi.ultrasonicRead(ultrasonic_ranger))
-
+        time.sleep(0.1) # don't overload the i2c bus
+        
     except Exception as e:
         print ("Error:{}".format(e))
     
@@ -31,8 +32,6 @@ while True:
         print(grovepi.digitalRead(button))
         time.sleep(.5)
         
-    time.sleep(0.1) # don't overload the i2c bus
-    
     else:
         print("Back off")
 

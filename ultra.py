@@ -32,7 +32,7 @@ while True:
     dist_list.append(act_dist)
     time.sleep(0.1) # don't overload the i2c bus
 
-   else ((grovepi.digitalRead(button))==0):
+   else
       print(dist_list)
            
 

@@ -28,9 +28,9 @@ while True:
     print('Reading distance values, press Ctrl-C to quit...')
     for i in range(50):
 	if (mcp.read_adc(0)>threshold):
-            print('Less than 5inch: ')
+            print('Less than 5 inch: ')
             print (mcp.read_adc(0))
         else:
-            print('More than 54 inch: ') 
+            print('More than 5 inch: ') 
             print (mcp.read_adc(0))
         time.sleep(0.1);

@@ -49,7 +49,8 @@ while True:
          time_list.pop(index)
          dist_list.remove(value_to_remove)
          
-      print(dist_list)
+      print(dist_list) 
+      print(time_list)
       print("Size of the list:", len(dist_list))
            
 

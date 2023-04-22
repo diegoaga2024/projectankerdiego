@@ -19,11 +19,13 @@ lower_thresh=5
 
 upper_thresh=30
 
-# Create empty list
+# Create empty lists
 dist_list= []
+time_list = []
 
 #Garbage Value
 value_to_remove = 65535
+garbage_indices = []
 
 while True:  
    act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
@@ -34,10 +36,19 @@ while True:
     act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
     dist_list.append(act_dist)
     time.sleep(0.1) # don't overload the i2c bus
+    # get the current time and add it to the list
+    current_time = time.time()
+    time_list.append(current_time)
+    # wait for 1 second
+    time.sleep(1)
+     
 
    else:
       while value_to_remove in dist_list:
+         index = dist_list.index(value_to_remove)
+         time_list.pop(index)
          dist_list.remove(value_to_remove)
+         
       print(dist_list)
       print("Size of the list:", len(dist_list))
            

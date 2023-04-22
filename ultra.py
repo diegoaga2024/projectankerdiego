@@ -34,7 +34,7 @@ while True:
        # get the current time and add it to the list
          print("Button pressed, recording data...")
          start_time = time.time()
-         time_list.append(start_time-start_time)
+         time_list.append(0)
          if ((act_dist > lower_thresh) and (act_dist < upper_thresh)):  #within threshold
            # Read distance value from Ultrasonic
             dist_list.append(int(grovepi.ultrasonicRead(ultrasonic_ranger)))

@@ -45,7 +45,6 @@ while True:
        # get the current time and add it to the list
       print("Button pressed, recording data...")
       start_time=time.time()
-      time_list.append(start_time-start_time)
       startflag=1
          
    elif ((grovepi.digitalRead(button)) and (startflag==1)):

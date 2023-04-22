@@ -30,6 +30,7 @@ garbage_indices = []
 startflag=0
 
 while True:  
+   act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
    
    while value_to_remove in dist_list:
       index = dist_list.index(value_to_remove) #get next 
@@ -40,20 +41,20 @@ while True:
    print(time_list)
    print("Size of the list:", len(dist_list))
    
-   if ((grovepi.digitalRead(button)) and (startflag==0)):# Button is pressed, hasn't started
+   if ((grovepi.digitalRead(button)) and (startflag==0)): # Button is pressed, hasn't started
        # get the current time and add it to the list
-         print("Button pressed, recording data...")
-         time_list.append(time.time()-start_time)
-         startflag=1
+      print("Button pressed, recording data...")
+      time_list.append(time.time()-start_time)
+      startflag=1
          
-   else if ((grovepi.digitalRead(button)) and (startflag==1)):
+   elif ((grovepi.digitalRead(button)) and (startflag==1)):
       if ((act_dist > lower_thresh) and (act_dist < upper_thresh) and (startflag==1)):  #within threshold
          # Read distance value from Ultrasonic
          dist_list.append(int(grovepi.ultrasonicRead(ultrasonic_ranger)))
          # get the current time and add it to the list
          time_list.append(time.time()-start_time)
          
-      else if ((act_dist < lower_thresh) or (act_dist < upper_thresh)):
+      elif ((act_dist < lower_thresh) or (act_dist < upper_thresh)):
              print("Stay in Range")
 
         

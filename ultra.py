@@ -57,5 +57,36 @@ while True:
          
       elif ((act_dist < lower_thresh) or (act_dist < upper_thresh)):
              print("Stay in Range")
+            
+   elif ((grovepi.digitalRead(button)==0) and (startflag==1)):   
+      # calculate the velocity and acceleration data
+      vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
+      acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
+      
+      # plot the distance vs. time data
+      fig1 = plot.figure()
+      plot.plot(time_list, dist_list, 'b-')
+      plot.xlabel('Time (s)')
+      plot.ylabel('Distance (m)')
+      plot.title('Distance vs. Time')
+
+      # plot the velocity vs. time data
+      fig2= plot.figure()
+      plot.plot(time_list[:-1], vel_list, 'g-')
+      plot.xlabel('Time (s)')
+      plot.ylabel('Velocity (m/s)')
+      plot.title('Velocity vs. Time')
+
+      # plot the acceleration vs. time data
+      fig3= plot.figure()
+      plot.plot(time_list[:-2], acc_list, 'r-')
+      plot.xlabel('Time (s)')
+      plot.ylabel('Acceleration (m/s^2)')
+      plot.title('Acceleration vs. Time')
+
+      # display the plots
+      plot.show()
+      
+
 
         

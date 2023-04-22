@@ -36,10 +36,6 @@ while True:
       index = dist_list.index(value_to_remove) #get next 
       time_list.pop(index)
       dist_list.remove(value_to_remove)
-      
-   print(dist_list) 
-   print(time_list)
-   print("Size of the list:", len(dist_list))
    
    if ((grovepi.digitalRead(button)) and (startflag==0)): # Button is pressed, hasn't started
        # get the current time and add it to the list
@@ -84,7 +80,11 @@ while True:
       plot.title('Acceleration vs. Time')
 
       # display the plots
-      plot.show()
+      plot.savefig()
+      print(dist_list) 
+      print(time_list)
+      print("Size of the distance list:", len(dist_list))
+      print("Size of the time list:", len(time_list))
       
 
 

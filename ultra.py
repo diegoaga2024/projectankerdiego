@@ -58,29 +58,32 @@ while True:
       vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
       
-      # plot the distance vs. time data
-      fig1 = plot.figure()
-      plot.plot(time_list, dist_list, 'b-')
-      plot.xlabel('Time (s)')
-      plot.ylabel('Distance (m)')
-      plot.title('Distance vs. Time')
+      # Create a grid of subplots
+      fig, axs = plt.subplots(3, 1, figsize=(6, 8))
 
-      # plot the velocity vs. time data
-      fig2= plot.figure()
-      plot.plot(time_list[:-1], vel_list, 'g-')
-      plot.xlabel('Time (s)')
-      plot.ylabel('Velocity (m/s)')
-      plot.title('Velocity vs. Time')
+      # Plot the distance vs. time data
+      axs[0].plot(time_list, dist_list, 'b-')
+      axs[0].set_xlabel('Time (s)')
+      axs[0].set_ylabel('Distance (m)')
+      axs[0].set_title('Distance vs. Time')
 
-      # plot the acceleration vs. time data
-      fig3= plot.figure()
-      plot.plot(time_list[:-2], acc_list, 'r-')
-      plot.xlabel('Time (s)')
-      plot.ylabel('Acceleration (m/s^2)')
-      plot.title('Acceleration vs. Time')
+      # Plot the velocity vs. time data
+      axs[1].plot(time_list[:-1], vel_list, 'g-')
+      axs[1].set_xlabel('Time (s)')
+      axs[1].set_ylabel('Velocity (m/s)')
+      axs[1].set_title('Velocity vs. Time')
 
-      # display the plots
-      plot.savefig()
+            # Plot the acceleration vs. time data
+      axs[2].plot(time_list[:-2], acc_list, 'r-')
+      axs[2].set_xlabel('Time (s)')
+      axs[2].set_ylabel('Acceleration (m/s^2)')
+      axs[2].set_title('Acceleration vs. Time')
+
+      # Adjust the spacing between subplots
+      plt.subplots_adjust(hspace=0.5)
+
+      # Save the plot to a file
+      plt.savefig('plots.png')
       print(dist_list) 
       print(time_list)
       print("Size of the distance list:", len(dist_list))

@@ -41,6 +41,7 @@ while True:
        # get the current time and add it to the list
       print("Button pressed, recording data...")
       start_time=time.time()
+      time_list.append(start_time-start_time)
       startflag=1
          
    elif ((grovepi.digitalRead(button)) and (startflag==1)):
@@ -55,8 +56,8 @@ while True:
             
    elif ((grovepi.digitalRead(button)==0) and (startflag==1)):   
       # calculate the velocity and acceleration data
-      vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
-      acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
+      #vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
+      #acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
       print(dist_list) 
       print(time_list)
       print("Size of the distance list:", len(dist_list))

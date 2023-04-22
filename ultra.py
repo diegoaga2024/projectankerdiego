@@ -30,21 +30,21 @@ garbage_indices = []
 while True:  
    act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
    
-   if ((grovepi.digitalRead(button)):# Button is pressed
+   if ((grovepi.digitalRead(button))):# Button is pressed
        # get the current time and add it to the list
          start_time = time.time()
          time_list.append(start_time)
-       if ((act_dist > lower_thresh) and (act_dist < upper_thresh)):  #within threshold
-         print("Button pressed, recording data...")
-         # Read distance value from Ultrasonic
-         act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
-         dist_list.append(act_dist)
-         time.sleep(0.1) # don't overload the i2c bus
-         # get the current time and add it to the list
-         current_time = time.time()
-         time_list.append(current_time)
-         # wait for 1 second
-         time.sleep(1)
+         if ((act_dist > lower_thresh) and (act_dist < upper_thresh)):  #within threshold
+            print("Button pressed, recording data...")
+            # Read distance value from Ultrasonic
+            act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
+            dist_list.append(act_dist)
+            time.sleep(0.1) # don't overload the i2c bus
+            # get the current time and add it to the list
+            current_time = time.time()
+            time_list.append(current_time)
+             # wait for 1 second
+            time.sleep(1)
      
 
    else:

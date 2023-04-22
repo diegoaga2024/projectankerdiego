@@ -59,7 +59,7 @@ while True:
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
       
       # Create a grid of subplots
-      fig, axs = plt.subplots(3, 1, figsize=(6, 8))
+      fig, axs = plot.subplots(3, 1, figsize=(6, 8))
 
       # Plot the distance vs. time data
       axs[0].plot(time_list, dist_list, 'b-')
@@ -88,7 +88,3 @@ while True:
       print(time_list)
       print("Size of the distance list:", len(dist_list))
       print("Size of the time list:", len(time_list))
-      
-
-
-        

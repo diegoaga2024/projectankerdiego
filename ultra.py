@@ -80,10 +80,10 @@ while True:
       axs[2].set_title('Acceleration vs. Time')
 
       # Adjust the spacing between subplots
-      plt.subplots_adjust(hspace=0.5)
+      plot.subplots_adjust(hspace=0.5)
 
       # Save the plot to a file
-      plt.savefig('plots.png')
+      plot.savefig('plots.png')
       print(dist_list) 
       print(time_list)
       print("Size of the distance list:", len(dist_list))

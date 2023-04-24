@@ -83,7 +83,7 @@ while True:
       plot.subplots_adjust(hspace=0.5)
 
       # Save the plot to a file
-      plot.savefig('plots.png')
+      plot.savefig('plots.jpg')
       print(dist_list) 
       print(time_list)
       print("Size of the distance list:", len(dist_list))

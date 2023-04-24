@@ -41,7 +41,6 @@ while True:
        # get the current time and add it to the list
       print("Button pressed, recording data...")
       start_time=time.time()
-      time_list.append(start_time-start_time)
       startflag=1
          
    elif ((grovepi.digitalRead(button)) and (startflag==1)):
@@ -56,8 +55,35 @@ while True:
             
    elif ((grovepi.digitalRead(button)==0) and (startflag==1)):   
       # calculate the velocity and acceleration data
-      #vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
-      #acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
+      vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
+      acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
+      
+      # Create a grid of subplots
+      fig, axs = plot.subplots(3, 1, figsize=(6, 8))
+
+      # Plot the distance vs. time data
+      axs[0].plot(time_list, dist_list, 'b-')
+      axs[0].set_xlabel('Time (s)')
+      axs[0].set_ylabel('Distance (m)')
+      axs[0].set_title('Distance vs. Time')
+
+      # Plot the velocity vs. time data
+      axs[1].plot(time_list[:-1], vel_list, 'g-')
+      axs[1].set_xlabel('Time (s)')
+      axs[1].set_ylabel('Velocity (m/s)')
+      axs[1].set_title('Velocity vs. Time')
+
+            # Plot the acceleration vs. time data
+      axs[2].plot(time_list[:-2], acc_list, 'r-')
+      axs[2].set_xlabel('Time (s)')
+      axs[2].set_ylabel('Acceleration (m/s^2)')
+      axs[2].set_title('Acceleration vs. Time')
+
+      # Adjust the spacing between subplots
+      plot.subplots_adjust(hspace=0.5)
+
+      # Save the plot to a file
+      plot.savefig('plots.png')
       print(dist_list) 
       print(time_list)
       print("Size of the distance list:", len(dist_list))

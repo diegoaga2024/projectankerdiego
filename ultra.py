@@ -1,6 +1,7 @@
 import grovepi
 import time
 import matplotlib.pyplot as plot
+import paho.mqtt.publish as publish
 
 # set I2C to use the hardware bus
 grovepi.set_bus("RPI_1")
@@ -28,6 +29,7 @@ value_to_remove = 65535
 garbage_indices = []
 
 startflag=0
+
 
 while True:  
    act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
@@ -57,7 +59,10 @@ while True:
       # calculate the velocity and acceleration data
       vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
-      
+
+      publish.single("distance", dist_list, hostname = "eclipse.usc.edu", port=11000)
+      publish.single("velocity", vel_list, hostname="eclipse.usc.edu", port=11001)
+      publish.single("acceleration", acc_list, hostname="eclipse.usc.edu", port=11002)
       # Create a grid of subplots
       fig, axs = plot.subplots(3, 1, figsize=(6, 8))
 

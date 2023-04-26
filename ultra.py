@@ -1,7 +1,8 @@
 import grovepi
 import time
-import matplotlib.pyplot as plot
-import paho.mqtt.publish as publish
+import paho.mqtt.client as mqtt
+import socket
+import json
 
 # set I2C to use the hardware bus
 grovepi.set_bus("RPI_1")
@@ -29,6 +30,9 @@ value_to_remove = 65535
 garbage_indices = []
 
 startflag=0
+
+def on_connect(client,userdata, flags, rc):
+   print("Connected to server with result code" + str(rc))
 
 
 while True:  
@@ -60,36 +64,24 @@ while True:
       vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
 
-      publish.single("distance", dist_list, hostname = "eclipse.usc.edu", port=11000)
-      publish.single("velocity", vel_list, hostname="eclipse.usc.edu", port=11001)
-      publish.single("acceleration", acc_list, hostname="eclipse.usc.edu", port=11002)
-      # Create a grid of subplots
-      fig, axs = plot.subplots(3, 1, figsize=(6, 8))
+      json_dist_list = json.dumps(dist_list)
+      json_vel_list = json.dumps(vel_list)
+      json_acc_list = json.dumps(acc_list)
 
-      # Plot the distance vs. time data
-      axs[0].plot(time_list, dist_list, 'b-')
-      axs[0].set_xlabel('Time (s)')
-      axs[0].set_ylabel('Distance (m)')
-      axs[0].set_title('Distance vs. Time')
-
-      # Plot the velocity vs. time data
-      axs[1].plot(time_list[:-1], vel_list, 'g-')
-      axs[1].set_xlabel('Time (s)')
-      axs[1].set_ylabel('Velocity (m/s)')
-      axs[1].set_title('Velocity vs. Time')
-
-            # Plot the acceleration vs. time data
-      axs[2].plot(time_list[:-2], acc_list, 'r-')
-      axs[2].set_xlabel('Time (s)')
-      axs[2].set_ylabel('Acceleration (m/s^2)')
-      axs[2].set_title('Acceleration vs. Time')
-
-      # Adjust the spacing between subplots
-      plot.subplots_adjust(hspace=0.5)
-
-      # Save the plot to a file
-      plot.savefig('plots.jpg')
-      print(dist_list) 
+      client = mqtt.Client()
+      client.on_connect = on_connect
+      client.connect("mqtt.eclipseprojects.io",1883, 60)
+      client.loop_start()
+      print(dist_list)
       print(time_list)
-      print("Size of the distance list:", len(dist_list))
-      print("Size of the time list:", len(time_list))
+
+      client.publish("diegoankur/dist",json_dist_list)
+      print ("Publishing distance"+ json_dist_list)
+      time.sleep(4)
+      client.publish("diegoankur/vel", json_vel_list)
+      print("Publishing velocity")
+      time.sleep(4)
+      client.publish("diegoankur/acc", json_acc_list)
+      print("Publishing acceleration")
+      time.sleep(4)
+

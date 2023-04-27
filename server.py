@@ -49,19 +49,19 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message_from_time(client, userdata, message):
     print("Received time list: "+ message.payload.decode())
-    time_samples= [float(x) for x in message.payload.decode().split()]
+    time_samples= [float(x) for x in message.payload.decode().split(,)]
         
 def on_message_from_dist(client, userdata, message):
     print("Received dist list: "+ message.payload.decode())
-    dist_samples= [float(x) for x in message.payload.decode().split()]
+    dist_samples= [float(x) for x in message.payload.decode().split(,)]
 
 def on_message_from_vel(client, userdata, message):
     print("Received velocity list: " + message.payload.decode())
-    vel_samples= [float(x) for x in message.payload.decode().split()]
+    vel_samples= [float(x) for x in message.payload.decode().split(,)]
 
 def on_message_from_acc(client, userdata, message):
     print("Received acceleration list: "+ message.payload.decode())
-    acc_samples= [float(x) for x in message.payload.decode().split()]
+    acc_samples= [float(x) for x in message.payload.decode().split(,)]
 
 client= mqtt.Client()    #create a client object
 client.on_connect = on_connect #attach the on_connect() callback function defined above to the mqtt client

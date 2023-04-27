@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
         client.subscribe("diegoankur/vel")
         client.subscribe("diegoankur/acc")
         
-        client.message_callback_add("diegoankur/time", on_message_from_dist)
+        client.message_callback_add("diegoankur/time", on_message_from_time)
         client.message_callback_add("diegoankur/dist", on_message_from_dist)
         client.message_callback_add("diegoankur/vel", on_message_from_vel)
         client.message_callback_add("diegoankur/acc", on_message_from_acc)

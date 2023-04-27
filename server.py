@@ -67,10 +67,11 @@ def on_message_from_acc(client, userdata, message):
     acc_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(acc_samples)   
 
-client= mqtt.Client()    #create a client object
-client.on_connect = on_connect #attach the on_connect() callback function defined above to the mqtt client
-client.connect("mqtt.eclipseprojects.io", 1883, 60) # Connect using the following hostname, port, and keepalive
-time.sleep(1)
-client.loop_forever()
+while True:
+        client= mqtt.Client()    #create a client object
+        client.on_connect = on_connect #attach the on_connect() callback function defined above to the mqtt client
+        client.connect("mqtt.eclipseprojects.io", 1883, 60) # Connect using the following hostname, port, and keepalive
+        time.sleep(1)
+        client.loop_forever()
 
 

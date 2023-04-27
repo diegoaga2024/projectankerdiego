@@ -46,7 +46,7 @@ client= mqtt.Client()    #create a client object
 client.on_connect = on_connect #attach the on_connect() callback function defined above to the mqtt client
 client.connect("mqtt.eclipseprojects.io", 1883, 60) # Connect using the following hostname, port, and keepalive
 time.sleep(1)
-#client.loop_forever()
+client.loop_forever()
 
 # Plot the distance vs. time data
 axs[0].plot(time_samples, dist_samples, 'b-')

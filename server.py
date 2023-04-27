@@ -7,6 +7,11 @@ fig, axs = plot.subplots(3, 1, figsize=(6, 8))
 # Adjust the spacing between subplots
 plot.subplots_adjust(hspace=0.5)
 
+time_samples= []
+dist_samples= []
+vel_samples= []
+acc_samples= []
+
 def on_connect(client, userdata, flags, rc):
         print("Connected")
         client.subscribe("diegoankur/time")
@@ -43,7 +48,6 @@ client.connect("mqtt.eclipseprojects.io", 1883, 60) # Connect using the followin
 time.sleep(1)
 #client.loop_forever()
 
-        
 # Plot the distance vs. time data
 axs[0].plot(time_samples, dist_samples, 'b-')
 axs[0].set_xlabel('Time (s)')

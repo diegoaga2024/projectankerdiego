@@ -41,11 +41,10 @@ def on_message_from_acc(client, userdata, message):
     axs[2].set_ylabel('Acceleration (m/s^2)')
     axs[2].set_title('Acceleration vs. Time')
 
-while True:
-        client= mqtt.Client()    #create a client object
-        client.on_connect = on_connect #attach the on_connect() callback function defined above to the mqtt client
-        client.connect("mqtt.eclipseprojects.io", 1883, 60) # Connect using the following hostname, port, and keepalive
-        #client.loop_forever()
-        time.sleep(4)
-        # Save the plot to a file
-        plot.savefig('plots.jpg')
+client= mqtt.Client()    #create a client object
+client.on_connect = on_connect #attach the on_connect() callback function defined above to the mqtt client
+client.connect("mqtt.eclipseprojects.io", 1883, 60) # Connect using the following hostname, port, and keepalive
+#client.loop_forever()
+
+# Save the plot to a file
+plot.savefig('plots.jpg')

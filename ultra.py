@@ -69,9 +69,10 @@ while True:
       vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
       
-      print(dist_list)
-      print(time_list)
-      print(acc_list)
+      time_list = [int(x) for x in time_list]
+      dist_list = [int(x) for x in dist_list]
+      vel_list = [int(x) for x in vel_list]
+      acc_list = [int(x) for x in acc_list]
       
       json_time_list = json.dumps(time_list)
       json_dist_list = json.dumps(dist_list)

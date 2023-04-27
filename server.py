@@ -8,6 +8,8 @@ dist_samples= []
 vel_samples= []
 acc_samples= []
 
+gotdata=0
+
 def get_plot():
         fig, axs = plot.subplots(3, 1, figsize=(6, 8))
         # Adjust the spacing between subplots
@@ -45,7 +47,8 @@ def on_connect(client, userdata, flags, rc):
         client.message_callback_add("diegoankur/vel", on_message_from_vel)
         client.message_callback_add("diegoankur/acc", on_message_from_acc)
         
-        get_plot()
+        if (gotdata):
+                get_plot()
 
 def on_message_from_time(client, userdata, message):
     print("Received time list: ")
@@ -53,19 +56,20 @@ def on_message_from_time(client, userdata, message):
     print(time_samples)
         
 def on_message_from_dist(client, userdata, message):
-    print("Received dist list: "+ message.payload.decode())
+    print("Received dist list: ")
     dist_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(dist_samples)
 
 def on_message_from_vel(client, userdata, message):
-    print("Received velocity list: " + message.payload.decode())
+    print("Received velocity list: ")
     vel_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(vel_samples)
 
 def on_message_from_acc(client, userdata, message):
-    print("Received acceleration list: "+ message.payload.decode())
+    print("Received acceleration list: ")
     acc_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
-    print(acc_samples)   
+    print(acc_samples)
+    gotdata=1
 
 while True:
         client= mqtt.Client()    #create a client object

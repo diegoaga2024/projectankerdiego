@@ -11,7 +11,7 @@ acc_samples= []
 gotdata=0
 
 def get_plot():
-        fig, axs = plot.subplots(3, 1, figsize=(6, 8))
+        #fig, axs = plot.subplots(3, 1, figsize=(6, 8))
         # Adjust the spacing between subplots
         plot.subplots_adjust(hspace=0.5)
        # Plot the distance vs. time data

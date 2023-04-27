@@ -69,18 +69,20 @@ while True:
       vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
       
+      print(dist_list)
+      print(time_list)
+      print(acc_list)
+      
       json_dist_list = json.dumps(dist_list)
       json_vel_list = json.dumps(vel_list)
       json_acc_list = json.dumps(acc_list)
-      print(dist_list)
-      print(time_list)
-
+      
       client.publish("diegoankur/dist",json_dist_list)
-      print ("Publishing distance"+ json_dist_list)
-      time.sleep(4)
+      print ("Publishing distance")
+      time.sleep(1)
       client.publish("diegoankur/vel", json_vel_list)
       print("Publishing velocity")
-      time.sleep(4)
+      time.sleep(1)
       client.publish("diegoankur/acc", json_acc_list)
       print("Publishing acceleration")
       time.sleep(4)

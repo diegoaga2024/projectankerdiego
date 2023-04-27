@@ -24,15 +24,15 @@ def on_message_from_time(client, userdata, message):
     time_samples= message.payload.decode()
         
 def on_message_from_dist(client, userdata, message):
-    print("Will graph distance - Received dist list: "+ message.payload.decode())
+    print("Received dist list: "+ message.payload.decode())
     dist_samples= message.payload.decode()
 
 def on_message_from_vel(client, userdata, message):
-    print("Will graph velocity - Received dist list: " + message.payload.decode())
+    print("Received velocity list: " + message.payload.decode())
     vel_samples= message.payload.decode()
 
 def on_message_from_acc(client, userdata, message):
-    print("Will graph acceleration - Received dist list: "+ message.payload.decode())
+    print("Received acceleration list: "+ message.payload.decode())
     acc_samples= message.payload.decode()
 
 

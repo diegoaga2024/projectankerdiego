@@ -54,8 +54,9 @@ while True:
    if ((grovepi.digitalRead(button)) and (startflag==0)): # Button is pressed, hasn't started
        # get the current time and add it to the list
       print("Button pressed, recording data...")
-      start_time=time.time()
+      start_time = time.time()
       startflag=1
+      time.sleep(2)
          
    elif ((grovepi.digitalRead(button)) and (startflag==1)): # Button is pressed, and inital start time with recorded
       if ((act_dist > lower_thresh) and (act_dist < upper_thresh) and (startflag==1)):  #If within threshold
@@ -76,6 +77,7 @@ while True:
       dist_list = [int(x) for x in dist_list]
       vel_list = [int(x) for x in vel_list]
       acc_list = [int(x) for x in acc_list]
+      
       print(time_list)
       print(dist_list)
       print(vel_list)

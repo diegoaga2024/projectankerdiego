@@ -73,6 +73,9 @@ while True:
       dist_list = [int(x) for x in dist_list]
       vel_list = [int(x) for x in vel_list]
       acc_list = [int(x) for x in acc_list]
+      print(time_list)
+      print(dist_list)
+      print(vel_list)
       
       json_time_list = json.dumps(time_list)
       json_dist_list = json.dumps(dist_list)

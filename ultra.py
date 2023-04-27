@@ -33,7 +33,12 @@ startflag=0
 
 def on_connect(client,userdata, flags, rc):
    print("Connected to server with result code" + str(rc))
-
+   
+client = mqtt.Client() #create a client object
+client.on_connect = on_connect #attach the on_connect() callback function defined above to the mqtt client
+client.connect("mqtt.eclipseprojects.io",1883, 60) #Connect using the following hostname, port, and keepalive interval 
+client.loop_start() #ask paho-mqtt to spawn a separate thread to handle incoming and outgoing mqtt messages.
+time.sleep(1) #causes program to pause for 1 second to complete connection process
 
 while True:  
    act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
@@ -49,29 +54,24 @@ while True:
       start_time=time.time()
       startflag=1
          
-   elif ((grovepi.digitalRead(button)) and (startflag==1)):
-      if ((act_dist > lower_thresh) and (act_dist < upper_thresh) and (startflag==1)):  #within threshold
-         # Read distance value from Ultrasonic
-         dist_list.append(int(grovepi.ultrasonicRead(ultrasonic_ranger)))
-         # get the current time and add it to the list
+   elif ((grovepi.digitalRead(button)) and (startflag==1)): # Button is pressed, and inital start time with recorded
+      if ((act_dist > lower_thresh) and (act_dist < upper_thresh) and (startflag==1)):  #If within threshold
+         # Add distance value from Ultrasonic
+         dist_list.append(act_dist)
+         # Get the current time and add it to the list
          time_list.append(time.time()-start_time)
          
       elif ((act_dist < lower_thresh) or (act_dist < upper_thresh)):
-             print("Stay in Range")
+             print("Stay in Range") #Data outside of range not added to threshold
             
-   elif ((grovepi.digitalRead(button)==0) and (startflag==1)):   
+   elif ((grovepi.digitalRead(button)==0) and (startflag==1)): # Button not being pressed, and data was already taken 
       # calculate the velocity and acceleration data
       vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
-
+      
       json_dist_list = json.dumps(dist_list)
       json_vel_list = json.dumps(vel_list)
       json_acc_list = json.dumps(acc_list)
-
-      client = mqtt.Client()
-      client.on_connect = on_connect
-      client.connect("mqtt.eclipseprojects.io",1883, 60)
-      client.loop_start()
       print(dist_list)
       print(time_list)
 

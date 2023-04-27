@@ -24,12 +24,15 @@ upper_thresh=30
 # Create empty lists
 dist_list= []
 time_list = []
+vel_list = []
+acc_list = []
 
 #Garbage Value
 value_to_remove = 65535
 garbage_indices = []
 
 startflag=0
+sentflag=0
 
 def on_connect(client,userdata, flags, rc):
    print("Connected to server with result code" + str(rc))
@@ -64,7 +67,7 @@ while True:
       elif ((act_dist < lower_thresh) or (act_dist < upper_thresh)):
              print("Stay in Range") #Data outside of range not added to threshold
             
-   elif ((grovepi.digitalRead(button)==0) and (startflag==1)): # Button not being pressed, and data was already taken 
+   elif ((grovepi.digitalRead(button)==0) and (startflag==1) and (sentflag==0)): # Button not being pressed, and data was already taken 
       # calculate the velocity and acceleration data
       vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
@@ -93,5 +96,6 @@ while True:
       time.sleep(1)
       client.publish("diegoankur/acc", json_acc_list)
       print("Publishing acceleration")
+      sentflag=1
       time.sleep(4)
 

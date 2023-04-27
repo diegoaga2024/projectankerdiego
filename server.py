@@ -3,14 +3,35 @@ import json
 import matplotlib.pyplot as plot
 import time
 
-fig, axs = plot.subplots(3, 1, figsize=(6, 8))
-# Adjust the spacing between subplots
-plot.subplots_adjust(hspace=0.5)
-
 time_samples= []
 dist_samples= []
 vel_samples= []
 acc_samples= []
+
+def get_plot():
+        fig, axs = plot.subplots(3, 1, figsize=(6, 8))
+        # Adjust the spacing between subplots
+        plot.subplots_adjust(hspace=0.5)
+       # Plot the distance vs. time data
+        axs[0].plot(time_samples, dist_samples, 'b-')
+        axs[0].set_xlabel('Time (s)')
+        axs[0].set_ylabel('Distance (m)')
+        axs[0].set_title('Distance vs. Time')
+
+        # Plot the velocity vs. time data
+        axs[1].plot(time_samples[:-1], vel_samples, 'g-')
+        axs[1].set_xlabel('Time (s)')
+        axs[1].set_ylabel('Velocity (m/s)')
+        axs[1].set_title('Velocity vs. Time')
+
+         # Plot the acceleration vs. time data
+        axs[2].plot(time_samples[:-2], acc_samples, 'r-')
+        axs[2].set_xlabel('Time (s)')
+        axs[2].set_ylabel('Acceleration (m/s^2)')
+        axs[2].set_title('Acceleration vs. Time')
+
+        # Save the plot to a file
+        plot.savefig('plots.jpg')
 
 def on_connect(client, userdata, flags, rc):
         print("Connected")
@@ -23,6 +44,8 @@ def on_connect(client, userdata, flags, rc):
         client.message_callback_add("diegoankur/dist", on_message_from_dist)
         client.message_callback_add("diegoankur/vel", on_message_from_vel)
         client.message_callback_add("diegoankur/acc", on_message_from_acc)
+        
+        get_plot()
 
 def on_message_from_time(client, userdata, message):
     print("Received time list: "+ message.payload.decode())
@@ -48,23 +71,4 @@ client.connect("mqtt.eclipseprojects.io", 1883, 60) # Connect using the followin
 time.sleep(1)
 client.loop_forever()
 
-# Plot the distance vs. time data
-axs[0].plot(time_samples, dist_samples, 'b-')
-axs[0].set_xlabel('Time (s)')
-axs[0].set_ylabel('Distance (m)')
-axs[0].set_title('Distance vs. Time')
 
-# Plot the velocity vs. time data
-axs[1].plot(time_samples[:-1], vel_samples, 'g-')
-axs[1].set_xlabel('Time (s)')
-axs[1].set_ylabel('Velocity (m/s)')
-axs[1].set_title('Velocity vs. Time')
-
- # Plot the acceleration vs. time data
-axs[2].plot(time_samples[:-2], acc_samples, 'r-')
-axs[2].set_xlabel('Time (s)')
-axs[2].set_ylabel('Acceleration (m/s^2)')
-axs[2].set_title('Acceleration vs. Time')
-
-# Save the plot to a file
-plot.savefig('plots.jpg')

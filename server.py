@@ -52,22 +52,22 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message_from_time(client, userdata, message):
     print("Received time list: ")
-    time_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
+    time_samples= [int(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(time_samples)
         
 def on_message_from_dist(client, userdata, message):
     print("Received dist list: ")
-    dist_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
+    dist_samples= [int(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(dist_samples)
 
 def on_message_from_vel(client, userdata, message):
     print("Received velocity list: ")
-    vel_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
+    vel_samples= [int(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(vel_samples)
 
 def on_message_from_acc(client, userdata, message):
     print("Received acceleration list: ")
-    acc_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
+    acc_samples= [int(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(acc_samples)
     gotdata=1
 

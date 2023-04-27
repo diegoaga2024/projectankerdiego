@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 import json
 import matplotlib.pyplot as plot
+import time
 
 fig, axs = plot.subplots(3, 1, figsize=(6, 8))
 # Adjust the spacing between subplots

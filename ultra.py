@@ -73,10 +73,14 @@ while True:
       print(time_list)
       print(acc_list)
       
+      json_time_list = json.dumps(time_list)
       json_dist_list = json.dumps(dist_list)
       json_vel_list = json.dumps(vel_list)
       json_acc_list = json.dumps(acc_list)
       
+      client.publish("diegoankur/time",json_time_list)
+      print ("Publishing time")
+      time.sleep(1)
       client.publish("diegoankur/dist",json_dist_list)
       print ("Publishing distance")
       time.sleep(1)

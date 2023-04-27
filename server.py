@@ -50,6 +50,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message_from_time(client, userdata, message):
     print("Received time list: "+ message.payload.decode())
     time_samples= message.payload.decode()
+    print(type(time_samples))
         
 def on_message_from_dist(client, userdata, message):
     print("Received dist list: "+ message.payload.decode())

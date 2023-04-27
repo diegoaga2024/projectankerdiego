@@ -73,10 +73,10 @@ while True:
       vel_list = [(dist_list[i+1] - dist_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-1)]
       acc_list = [(vel_list[i+1] - vel_list[i]) / (time_list[i+1] - time_list[i]) for i in range(len(time_list)-2)]
       
-      time_list = [int(x) for x in time_list]
-      dist_list = [int(x) for x in dist_list]
-      vel_list = [int(x) for x in vel_list]
-      acc_list = [int(x) for x in acc_list]
+      time_list = [round(float(x), 1) for x in time_list]
+      dist_list = [round(float(x), 1) for x in dist_list]
+      vel_list = [round(float(x), 1) for x in vel_list]
+      acc_list = [round(float(x), 1) for x in acc_list]
       
       print(time_list)
       print(dist_list)

@@ -19,6 +19,7 @@ def on_connect(client, userdata, flags, rc):
 # Custom message callback that prints the IP address
 def on_message_from_dist(client, userdata, message):
     print("Will graph distance - Received dist list: "+ message.payload.decode())
+    
     # Plot the distance vs. time data
     axs[0].plot(time_list, dist_list, 'b-')
     axs[0].set_xlabel('Time (s)')

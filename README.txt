@@ -10,3 +10,4 @@ time
 paho.mqtt.client as mqtt
 socket
 json
+matplotlib.pyplot as plot

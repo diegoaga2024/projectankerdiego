@@ -47,35 +47,37 @@ def on_connect(client, userdata, flags, rc):
         client.message_callback_add("diegoankur/vel", on_message_from_vel)
         client.message_callback_add("diegoankur/acc", on_message_from_acc)
 
-        return time_samples
-        return dist_samples
-        return vel_samples
-        return acc_samples
-
-
 def on_message_from_time(client, userdata, message):
+    global time_samples
     print("Received time list: ")
     time_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(time_samples)
-    return time_samples
+    if time_samples and dist_samples and vel_samples and acc_samples:
+        get_plot(time_samples,dist_samples, vel_samples, acc_samples)
         
 def on_message_from_dist(client, userdata, message):
+    global dist_samples
     print("Received dist list: ")
     dist_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(dist_samples)
-    return dist_samples
+    if time_samples and dist_samples and vel_samples and acc_samples:
+        get_plot(time_samples,dist_samples, vel_samples, acc_samples)
 
 def on_message_from_vel(client, userdata, message):
+    global vel_samples
     print("Received velocity list: ")
     vel_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(vel_samples)
-    return vel_samples
+    if time_samples and dist_samples and vel_samples and acc_samples:
+        get_plot(time_samples, dist_samples, vel_samples, acc_samples)
 
 def on_message_from_acc(client, userdata, message):
+    global acc_samples
     print("Received acceleration list: ")
     acc_samples= [float(x) for x in message.payload.decode()[1:-1].split(", ")]
     print(acc_samples)
-    return acc_samples
+    if time_samples and dist_samples and vel_samples and acc_samples:
+        get_plot(time_samples, dist_samples, vel_samples, acc_samples)
 
 while True:
         client= mqtt.Client()    #create a client object
@@ -83,8 +85,6 @@ while True:
         client.connect("mqtt.eclipseprojects.io", 1883, 60) # Connect using the following hostname, port, and keepalive
         time.sleep(1)
         client.loop_start()
-        print(acc_samples)
-        if bool(acc_samples):
+        if len(time_samples)>0 and len(dist_samples)>0 and len(vel_samples) >0 and len(acc_samples)>0:
             get_plot(time_samples, dist_samples, vel_samples, acc_samples)
-
-
+            print(dist_samples)

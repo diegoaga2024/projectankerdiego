@@ -25,3 +25,7 @@ paho.mqtt.client as mqtt
 socket
 json
 matplotlib.pyplot as plot
+
+Link to demo video:
+https://drive.google.com/file/d/1KEOgxJlhO2ZWd9jl8E_uOceJuC63LE7h/view?usp=share_link
+

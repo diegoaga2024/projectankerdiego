@@ -1,4 +1,4 @@
-Diego Garcia and Ankur
+Diego Garcia and Ankur Mathur
 
 Instructions on how to compile/execute a program:
 
